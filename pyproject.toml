@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-inference = ["openai>=1.0"]
+inference = ["openai>=1.0", "requests>=2.0.0"]
 dev = ["pytest", "httpx", "openai>=1.0"]
 
 [project.scripts]

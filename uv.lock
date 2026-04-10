@@ -571,6 +571,7 @@ dev = [
 ]
 inference = [
     { name = "openai" },
+    { name = "requests" },
 ]
 
 [package.metadata]
@@ -582,6 +583,7 @@ requires-dist = [
     { name = "openenv-core", specifier = ">=0.2.0" },
     { name = "pydantic", specifier = ">=2.0" },
     { name = "pytest", marker = "extra == 'dev'" },
+    { name = "requests", marker = "extra == 'inference'", specifier = ">=2.0.0" },
     { name = "uvicorn", specifier = ">=0.24.0" },
 ]
 provides-extras = ["inference", "dev"]
