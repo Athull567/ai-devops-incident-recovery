@@ -16,7 +16,8 @@ Output format (STRICT):
 import os
 import sys
 import json
-import requests
+import urllib.request
+import urllib.error
 from typing import Any, Optional
 
 # Try to import openai, but allow running without it for testing
@@ -50,15 +51,16 @@ MAX_STEPS = 15
 # =============================================================================
 
 class EnvClient:
-    """Simple HTTP client for the DevOps environment."""
+    """Simple HTTP client for the DevOps environment (zero dependencies)."""
 
     def __init__(self, base_url: str):
         self.base_url = base_url.rstrip("/")
 
     def health(self) -> bool:
         try:
-            r = requests.get(f"{self.base_url}/health", timeout=10)
-            return r.status_code == 200
+            req = urllib.request.Request(f"{self.base_url}/health")
+            with urllib.request.urlopen(req, timeout=10) as response:
+                return response.status == 200
         except Exception:
             return False
 
@@ -66,9 +68,16 @@ class EnvClient:
         payload = {"task_id": task_id}
         if seed is not None:
             payload["seed"] = seed
-        r = requests.post(f"{self.base_url}/reset", json=payload, timeout=30)
-        r.raise_for_status()
-        return r.json()
+        
+        data = json.dumps(payload).encode('utf-8')
+        req = urllib.request.Request(f"{self.base_url}/reset", data=data, 
+                                     headers={'Content-Type': 'application/json'})
+        
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except urllib.error.HTTPError as e:
+            raise Exception(f"HTTP Error {e.code}: {e.read().decode('utf-8')}")
 
     def step(self, action_type: str, target_service: Optional[str] = None) -> dict:
         payload = {
@@ -77,14 +86,25 @@ class EnvClient:
                 "target_service": target_service,
             }
         }
-        r = requests.post(f"{self.base_url}/step", json=payload, timeout=30)
-        r.raise_for_status()
-        return r.json()
+        
+        data = json.dumps(payload).encode('utf-8')
+        req = urllib.request.Request(f"{self.base_url}/step", data=data, 
+                                     headers={'Content-Type': 'application/json'})
+        
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except urllib.error.HTTPError as e:
+            raise Exception(f"HTTP Error {e.code}: {e.read().decode('utf-8')}")
 
     def get_tasks(self) -> list:
-        r = requests.get(f"{self.base_url}/tasks", timeout=10)
-        r.raise_for_status()
-        return r.json().get("tasks", [])
+        req = urllib.request.Request(f"{self.base_url}/tasks")
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                tasks_data = json.loads(response.read().decode('utf-8'))
+                return tasks_data.get("tasks", [])
+        except urllib.error.HTTPError as e:
+            raise Exception(f"HTTP Error {e.code}: {e.read().decode('utf-8')}")
 
 
 # =============================================================================
