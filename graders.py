@@ -94,7 +94,7 @@ def grade_task(
         diagnosis_score = 0.05
 
     total = round(correctness + efficiency + diagnosis_score, 4)
-    total = min(1.0, max(0.0, total))
+    total = min(0.99, max(0.01, total))
 
     return {
         "total": total,
