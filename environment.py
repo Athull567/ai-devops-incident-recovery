@@ -244,6 +244,8 @@ class DevOpsEnvironment:
             )
             info["grade"] = grade
             info["final_score"] = grade["total"]
+            info["score"] = grade["total"]  # Ensure standard OpenEnv score key
+            reward = grade["total"]         # OpenEnv final-reward score validation
 
         return self._build_observation(reward=reward, done=done, info=info)
 

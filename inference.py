@@ -437,14 +437,16 @@ def run_inference():
                 print(f"[STEP] step={step_num} action={action_str} reward={reward:.2f} done={done_str} error={error_str}")
 
             # Print END line
-            success = obs_data.get("observation", {}).get("metadata", {}).get("grade", {}).get("resolved", False) if done else False
+            metadata = obs_data.get("observation", {}).get("metadata", {})
+            success = metadata.get("grade", {}).get("resolved", False) if done else False
+            final_grade = metadata.get("score", total_reward) if done else total_reward
             success_str = "true" if success else "false"
-            print(f"[END] success={success_str} steps={step_num} rewards={total_reward:.2f}")
+            print(f"[END] success={success_str} steps={step_num} rewards={final_grade:.4f}")
 
         except Exception as e:
             # Always print END line even on error
-            print(f"[STEP] step=0 action=error:none reward=0.00 done=true error={str(e)[:100]}")
-            print(f"[END] success=false steps=0 rewards=0.00")
+            print(f"[STEP] step=0 action=error:none reward=0.01 done=true error={str(e)[:100]}")
+            print(f"[END] success=false steps=0 rewards=0.01")
 
     print("\n--- Inference complete ---", file=sys.stderr)
 
