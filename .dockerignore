@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+*.md
+!README.md
+test_env.py
+.env
+outputs/
+*.egg-info/
+dist/
+build/
