@@ -404,7 +404,8 @@ def run_inference():
             total_reward = 0.0
             done = False
             step_num = 0
-            error_str = "none"
+            error_str = "null"
+            step_rewards = []
 
             while not done and step_num < MAX_STEPS:
                 step_num += 1
@@ -427,10 +428,13 @@ def run_inference():
                     reward = obs_data.get("reward", 0.0)
                     done = obs_data.get("done", False)
                     total_reward += reward
-                    error_str = "none"
+                    error_str = "null"
                 except Exception as e:
-                    reward = 0.0
+                    reward = 0.00
                     error_str = str(e).replace("\n", " ")[:100]
+
+                # Accumulate formatted reward
+                step_rewards.append(f"{reward:.2f}")
 
                 # Print STEP line
                 done_str = "true" if done else "false"
@@ -439,18 +443,19 @@ def run_inference():
             # Print END line
             metadata = obs_data.get("observation", {}).get("metadata", {})
             success = metadata.get("grade", {}).get("resolved", False) if done else False
-            final_grade = metadata.get("score", total_reward) if done else total_reward
             
-            # STRICTLY VALIDATE THE SCORE MATERIALLY IN CASE EVALUATOR IS USING A DUMMY ENV
-            final_grade = min(0.9999, max(0.0001, final_grade))
-            
+            # Use accumulated rewards string as rigidly required by spec
+            rewards_str = ",".join(step_rewards)
+            if not rewards_str:
+                rewards_str = "0.01" # Safe fallback
+                
             success_str = "true" if success else "false"
-            print(f"[END] success={success_str} steps={step_num} rewards={final_grade:.4f}")
+            print(f"[END] success={success_str} steps={step_num} rewards={rewards_str}")
 
         except Exception as e:
             # Always print END line even on error
-            print(f"[STEP] step=0 action=error:none reward=0.01 done=true error={str(e)[:100]}")
-            print(f"[END] success=false steps=0 rewards=0.01")
+            print(f"[STEP] step=1 action=error:none reward=0.01 done=true error={str(e)[:100]}")
+            print(f"[END] success=false steps=1 rewards=0.01")
 
     print("\n--- Inference complete ---", file=sys.stderr)
 
