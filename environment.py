@@ -245,9 +245,14 @@ class DevOpsEnvironment:
             info["grade"] = grade
             info["final_score"] = grade["total"]
             info["score"] = grade["total"]  # Ensure standard OpenEnv score key
-            reward = grade["total"]         # OpenEnv final-reward score validation
+            
+            # Emit the full bounded score as the only reward in the episode
+            step_return_reward = grade["total"]
+        else:
+            # Emit zero reward for intermediate steps to prevent cumulative overflow
+            step_return_reward = 0.0
 
-        return self._build_observation(reward=reward, done=done, info=info)
+        return self._build_observation(reward=step_return_reward, done=done, info=info)
 
     @property
     def state(self) -> DevOpsState:
