@@ -135,13 +135,13 @@ class DevOpsEnvironment:
         """
         if self._done:
             return self._build_observation(
-                reward=0.0, done=True,
+                reward=0.0001, done=True,
                 info={"error": "Episode already ended. Call reset() to start a new one."}
             )
 
         if self._scenario is None:
             return self._build_observation(
-                reward=0.0, done=False,
+                reward=0.0001, done=False,
                 info={"error": "Environment not initialized. Call reset() first."}
             )
 
