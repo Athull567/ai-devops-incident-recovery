@@ -97,6 +97,7 @@ def grade_task(
     total = min(0.99, max(0.01, total))
 
     return {
+        "score": total,
         "total": total,
         "correctness": min(0.99, max(0.01, round(correctness, 4))),
         "efficiency": min(0.99, max(0.01, round(efficiency, 4))),
