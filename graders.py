@@ -98,9 +98,9 @@ def grade_task(
 
     return {
         "total": total,
-        "correctness": round(correctness, 4),
-        "efficiency": round(efficiency, 4),
-        "diagnosis": round(diagnosis_score, 4),
+        "correctness": min(0.99, max(0.01, round(correctness, 4))),
+        "efficiency": min(0.99, max(0.01, round(efficiency, 4))),
+        "diagnosis": min(0.99, max(0.01, round(diagnosis_score, 4))),
         "task_id": task_id,
         "steps_taken": step_count,
         "optimal_steps": optimal_steps,

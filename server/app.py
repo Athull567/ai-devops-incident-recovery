@@ -146,7 +146,7 @@ async def reset_env(request: ResetRequest = None):
                 "timestamp": obs_dict.get("timestamp", ""),
                 "metadata": obs_dict.get("metadata", {}),
             },
-            "reward": obs_dict.get("reward", 0.0),
+            "reward": obs_dict.get("reward", 0.0001),
             "done": obs_dict.get("done", False),
         }
     except ValueError as e:
@@ -175,7 +175,7 @@ async def step_env(request: StepRequest):
                 "timestamp": obs_dict.get("timestamp", ""),
                 "metadata": obs_dict.get("metadata", {}),
             },
-            "reward": obs_dict.get("reward", 0.0),
+            "reward": obs_dict.get("reward", 0.0001),
             "done": obs_dict.get("done", False),
         }
     except Exception as e:

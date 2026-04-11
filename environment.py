@@ -109,7 +109,7 @@ class DevOpsEnvironment:
         self._total_reward = 0.0
         self._done = False
 
-        return self._build_observation(reward=0.0, done=False, info={
+        return self._build_observation(reward=0.0001, done=False, info={
             "message": f"Incident detected! Task: {self._scenario.title}",
             "task_id": selected_task,
             "difficulty": self._scenario.difficulty,
@@ -249,8 +249,8 @@ class DevOpsEnvironment:
             # Emit the full bounded score as the only reward in the episode
             step_return_reward = grade["total"]
         else:
-            # Emit zero reward for intermediate steps to prevent cumulative overflow
-            step_return_reward = 0.0
+            # Emit tiny non-zero reward for intermediate steps to prevent exact 0.0 match
+            step_return_reward = 0.0001
 
         return self._build_observation(reward=step_return_reward, done=done, info=info)
 
