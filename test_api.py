@@ -2,7 +2,7 @@
 import requests
 import json
 
-BASE = "http://localhost:8000"
+BASE = "http://localhost:7860"
 
 # Test 1: Health
 r = requests.get(f"{BASE}/health")
