@@ -1,107 +1,236 @@
-# 🔧 Autonomous AI DevOps Incident Recovery Environment
+<div align="center">
 
-> **Revolutionizing Site Reliability Engineering through Agentic AI.**
-> An OpenEnv-compliant simulation platform for training and evaluating next-generation SRE Agents in high-consequence cloud environments.
+# 🔧 **AUTONOMOUS AI DEVOPS INCIDENT RECOVERY** 🔧
 
-[![OpenEnv Compatible](https://img.shields.io/badge/OpenEnv-Compatible-blue)](https://github.com/meta-pytorch/OpenEnv)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green)](https://python.org)
-[![Hugging Face Space](https://img.shields.io/badge/Deployed-Hugging%20Face-pink)](https://huggingface.co/spaces/athul890ak/devops-incident-recovery)
-[![Docker Ready](https://img.shields.io/badge/Docker-Ready-blue)](https://docker.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+## *Revolutionizing Site Reliability Engineering through Agentic AI* 🚀
+
+<br>
+
+[![OpenEnv Compatible](https://img.shields.io/badge/OpenEnv-Compatible-2E86AB?logo=meta&logoColor=white&style=for-the-badge)](https://github.com/meta-pytorch/OpenEnv)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green?logo=python&logoColor=white&style=for-the-badge)](https://python.org)
+[![Hugging Face Space](https://img.shields.io/badge/🤗_HuggingFace-Live_Space-pink?style=for-the-badge)](https://huggingface.co/spaces/athul890ak/devops-incident-recovery)
+[![Docker Ready](https://img.shields.io/badge/Docker-Ready-blue?logo=docker&logoColor=white&style=for-the-badge)](https://docker.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+
+### 🎯 *Advanced SRE Simulation for Frontier LLM Evaluation*
+
+✨ **Train AI agents to diagnose and fix cascading microservice failures**  
+🌍 *High-fidelity simulation of enterprise cloud incidents*  
+⚡ *OpenEnv Phase 2 compliant with zero-risk scoring*
+
+</div>
+
+<br>
 
 ---
 
-## 🚀 The Corporate Vision: Autonomous SRE
-In modern enterprise environments, cloud infrastructure downtime costs an average of **$5,600 per minute**. Traditional rule-based monitoring is no longer sufficient for complex microservice architectures. 
+## 🚀 **Quick Navigation**
 
-**Our Solution** provides a high-fidelity "Wargame" environment where AI Agents can:
-*   **Reduce MTTR (Mean Time to Resolution)** by diagnosing multi-service cascades in seconds.
-*   **Automate Tier-1 & Tier-2 response**, freeing human engineers for high-level architecture.
-*   **Benchmarking Performance**: Quantifiably measure which LLM (Llama 3, Qwen, etc.) is most reliable for production operations.
+<div align="center">
+
+| 📖 | 🏗️ | 📝 | 🔌 |
+|:--:|:--:|:--:|:--:|
+| [**About**](#-about-this-project) | [**Architecture**](#-system-architecture) | [**Scenarios**](#-incident-scenarios) | [**Setup**](#-quick-setup) |
+
+</div>
 
 ---
 
-## 🏗️ System Architecture
+## 📋 **About This Project**
+
+<div align="left">
+
+> ### 💡 **The Corporate Challenge**
+> 
+> In modern enterprise environments, downtime costs an average of **$5,600 per minute**. Traditional monitoring isn't enough for microservices.
+>
+> **Your mission?** Deploy AI Agents that can **Reduce MTTR** (Mean Time to Resolution) by diagnosing complex service cascades in seconds, freeing human engineers for higher-level architecture. 🛠️
+
+### 🌟 Why This Matters
+
+- 🚨 **Industrial Context**: Direct application to Site Reliability Engineering (SRE)
+- 🤖 **Reasoning over Math**: Tests an LLM's ability to deduce causes from logs—not just solve graph puzzles
+- 🌐 **Cascading Failures**: Realistic simulation where one service's health affects the entire stack
+- 📈 **Validator Resilience**: Engineered with strict range-clamping to ensure 100% success on automated gates
+- 🧠 **Observability**: Agents must parse timestamped logs and correlate alerts just like real humans
+
+</div>
+
+---
+
+## ⚡ **Key Features**
+
+<table align="center">
+<tr>
+<td align="center" width="33%">
+
+### 🤖 5 Incident Levels
+Easy → Medium → Hard  
+Progressive difficulty
+
+</td>
+<td align="center" width="33%">
+
+### 🧠 3-Vector Grader
+Correctness, Efficiency, & Diagnosis  
+Comprehensive rubrics
+
+</td>
+<td align="center" width="33%">
+
+### 👁️ Observability
+7 Unified Services  
+Real-time Logs & Alerts
+
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+
+### 🔌 Full APIs
+FastAPI Endpoints  
+Port 7860 Compliant
+
+</td>
+<td align="center" width="33%">
+
+### 🐳 Docker Ready
+One-click deployment  
+Production-grade build
+
+</td>
+<td align="center" width="33%">
+
+### ⚖️ Clamped Scoring
+Rigid (0.01 - 0.99) Perimeter  
+No "out of range" errors
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ **System Architecture**
+
 The environment simulates a 7-service microservice stack with real-world complexities:
-*   **Metric Drift**: Problems escalate if left unaddressed.
-*   **Cascading Failures**: A database bottleneck manifests as high CPU in the API layer—testing the agent's ability to see past "Red Herrings."
-*   **Realistic Observability**: Agents must parse timestamped logs, analyze telemetry, and correlate alerts—just like a human engineer.
+- **Metric Drift**: Problems escalate over time if left unaddressed.
+- **Cascading Failures**: A database bottleneck manifests as high CPU in the API layer—testing "Red Herring" detection.
+- **Realistic Interface**: Agents interact through structured JSON actions (Restart, Scale, Patch, Rollback).
 
 ---
 
-## 🛠️ Technical Engineering: Overcoming Evaluation Hurdles
-Building an environment for the **Meta x OpenEnv Hackathon** required solving several deep technical challenges to ensure absolute reliability during automated evaluation:
+## 💻 **Quick Setup**
 
-### 1. The Strict (0.01 - 0.99) Score Perimeter
-The OpenEnv validator requires task scores to be strictly between 0 and 1. We implemented a **Rigid Clamping Module** in `graders.py` that mathematically ensures every sub-metric and the final total are always within the safe zone, preventing any "out of range" disqualifications.
+### 📦 Installation (2 Minutes)
 
-### 2. Cumulative Reward Sum Stabilization
-Standard RL validators often sum step rewards. We refactored `environment.py` into a **Sparse Terminal Reward** model:
-*   **Intermediate Steps**: Yield exactly `0.0001` (to satisfy "strictly positive" requirements while remaining negligible).
-*   **Terminal Step**: Yields the full, clamped grader score.
-This ensures the cumulative sum perfectly reflects the intended task grade without calculation overflow.
-
-### 3. Native Grader Parsing
-To handle AST-level validator inspections, we injected a native `"score"` key into all grader return dictionaries, ensuring the platform's internal Python checks never fall back to `0.0` due to missing keys.
-
----
-
-## 👁️ Observation & Action Spaces
-### Observation Space
-| Component | Type | Description |
-|---|---|---|
-| `services` | `Dict` | Real-time CPU, RAM, Latency, and Error rates. |
-| `logs` | `List` | Last 20 system log lines (with diagnostic clues). |
-| `alerts` | `List` | Critical/Warning alerts from the infrastructure. |
-
-### Action Space
-| Action | Purpose |
-|---|---|
-| `diagnose` | Formalize root cause identification (Rewarded). |
-| `scale_up/down` | Resource optimization for connection exhaustion. |
-| `restart_service` | Recovery from memory leaks or process crashes. |
-| `rollback` | Remediation of bad deployments. |
-| `apply_patch` | Fixing deep-seated config/DNS issues.|
-
----
-
-## 📝 Incident Scenarios
-We provide 5 diverse tasks ranging from simple to "Frontier Specialist" difficulty:
-1.  **🟢 High CPU Leak**: Immediate corrective action needed for `api-server`.
-2.  **🟢 Service Crash**: Restoration of `payment-service` replicas.
-3.  **🟡 DB Connection Cascade**: Multi-service failure requiring horizontal scaling.
-4.  **🟡 Bad Deployment**: Rolling back a buggy frontend to stabilize the API retry-storm.
-5.  **🔴 Mesh DNS Corruption**: A hidden failure in the `service-mesh` proxy—testing the limit of log analysis.
-
----
-
-## ⚙️ Quick Start
-
-### 1. Local Run
 ```bash
+# 1️⃣ Clone and enter
+git clone <your-repo-url>
+cd ai_agent
+
+# 2️⃣ Install dependencies
 pip install -r requirements.txt
-uvicorn server.app:app --host 0.0.0.0 --port 7860
 ```
 
-### 2. Docker Execution
+### ▶️ Run Locally
+
 ```bash
+# Start the FastAPI server (Standard Port 7860)
+uvicorn server.app:app --host 0.0.0.0 --port 7860
+
+# 📊 Run the baseline inference
+python inference.py
+```
+
+### 🐳 Docker Deployment
+
+```bash
+# Build and Run
 docker build -t devops-env .
 docker run -p 7860:7860 devops-env
 ```
 
-### 3. Baseline Validation
-```bash
-python inference.py
+---
+
+## 📝 **Incident Scenarios**
+
+### 🟢 **EASY: Resource Leaks**
+- **High CPU Leak**: Immediate corrective action needed for `api-server`.
+- **Service Crash**: Restoration of `payment-service` replicas.
+
+### 🟡 **MEDIUM: Service Cascades**
+- **DB Connection Exhaustion**: Requires vertical diagnosis and horizontal scaling.
+- **Bad Deployment**: Rolling back a buggy frontend before logs are flooded.
+
+### 🔴 **HARD: Frontier Challenges**
+- **Mesh DNS Corruption**: A hidden failure in the proxy layer—testing the absolute limit of log analysis.
+
+---
+
+## 🔌 **API Reference**
+
+### 📡 **Standard Endpoints**
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/health` | Server heartbeat |
+| `GET` | `/tasks` | List incident scenarios |
+| `POST` | `/reset` | Start new incident episode |
+| `POST` | `/step` | Execute SRE action |
+| `GET` | `/state` | Full infrastructure dump |
+
+---
+
+## 📊 **Reward & Scoring Logic**
+
+```
+Reward = Σ (Correct_Action_Weight) 
+         - (Step_Penalty) 
+         - (Wrong_Action_Penalty)
+```
+
+**[STRICT COMPLIANCE]**: Our scoring engine ensures intermediate step rewards are exactly `0.0001` and final scores are clamped to `(0.01, 0.99)` to satisfy all OpenEnv validator constraints.
+
+---
+
+## 📁 **Project Structure**
+
+```
+📦 ai-devops-agent/
+│
+├── 🧠 server/                    # FastAPI Infrastructure
+│   ├── app.py                    # Main API Server
+│   └── ...                       
+│
+├── ⚙️ Core Modules
+│   ├── environment.py            # Simulation Logic
+│   ├── graders.py                # Clamped Scoring Engine
+│   ├── scenarios.py              # Task Definitions
+│   ├── models.py                 # Pydantic Schemas
+│   └── rewards.py                # Reward Shaping
+│
+├── 📋 Configuration
+│   ├── openenv.yaml              # App Config
+│   ├── Dockerfile                # Container Setup
+│   └── requirements.txt          # Dependencies
+│
+└── 📋 Validation
+    ├── inference.py              # LLM Baseline Script
+    ├── test_env.py               # Logic Tests
+    └── test_api.py               # API Verification
 ```
 
 ---
 
-## 📁 Repository Structure
-*   `environment.py`: Core simulation logic.
-*   `graders.py`: Robust, clamped scoring engine.
-*   `inference.py`: Zero-dependency Hackathon-spec baseline.
-*   `scenarios.py`: Configurable incident definitions.
-*   `server/app.py`: Standardized FastAPI endpoints.
+<div align="center">
+
+### 🌟 **Developed for the Meta x Pytorch x SST x OpenEnv Challenge** 🌟
+
+**[⭐ View on GitHub](https://github.com/Athull567/ai-devops-incident-recovery)** | **[🚀 Try Live Space](https://huggingface.co/spaces/athul890ak/devops-incident-recovery)**
+
+</div>
 
 ---
-**Developed for the Meta x Pytorch x SST x OpenEnv Challenge.**
+
+**Last Updated:** April 2026 | **Version:** 1.0.0 | **Status:** ✅ Zero-Risk Submission Ready
